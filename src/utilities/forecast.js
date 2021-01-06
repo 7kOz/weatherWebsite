@@ -21,13 +21,14 @@ const request = require('request')
 
 const forecast = (latitude, longitude, callback) => {
     const url = 'http://api.weatherstack.com/current?access_key=dcb0b4370ef34ddd3ecc8666ab9ab579&query=' + latitude + ',' + longitude + '&units=m'
-    request({ url, json: true }, (error, {body}) => {
+    request({ url, json: true }, (error, { body }) => {
         if (error) {
             callback('Unable to connect to weather services.', undefined)
         } else if (body.error) {
             callback('Coordinate error.', undefined)
         } else {
-            callback(undefined, body.current.weather_descriptions[0] + '. It\'s currently ' + body.current.temperature + ' degrees celsius out. There is a ' + body.current.precip + ' % chance of rain')
+            //console.log(body.current)  Check for editing what 
+            callback(undefined, body.current.weather_descriptions[0] + '. It\'s currently ' + body.current.temperature + ' degrees celsius out. Feels like ' + body.current.feelslike + '. There is a ' + body.current.precip + ' % chance of rain')
 
         }
     })
